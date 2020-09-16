@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Custom scripts
+new_leetcode_solution.sh
+runner.py
