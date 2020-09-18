@@ -1,5 +1,5 @@
+import os
 from argparse import ArgumentParser
-from pathlib import Path
 
 import requests
 
@@ -10,15 +10,14 @@ PROBLEMS_URL_BASE = 'https://leetcode.com/problems/'
 
 # Leetcode difficulties
 DIFFICULTY_MAP = {
-    1: 'easy',
-    2: 'medium',
-    3: 'hard'
+    1: 'Easy',
+    2: 'Medium',
+    3: 'Hard'
 }
 
 # Local file paths
-TOP_LEVEL_DIRECTORY = str(Path(__file__).parent.parent.absolute())
+TOP_LEVEL_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + '/..'
 SOLUTION_PATH_BASE = '/leetcode/solutions/'
-
 
 def main(slug: str) -> None:
     
@@ -40,7 +39,7 @@ def main(slug: str) -> None:
     
     # Add a row to the README table with problem data
     with open(TOP_LEVEL_DIRECTORY + '/leetcode/README.md', 'a') as f:
-        f.write(f"| {id_} | [{title}]({link}) | [{id_}.py]({solution_path}) |\n")
+        f.write(f"| {id_} | [{title}]({link}) | [{id_}.py]({solution_path}) | {difficulty} |\n")
 
     # Add a file for the problem under solutions
     open(TOP_LEVEL_DIRECTORY + solution_path, 'w')
