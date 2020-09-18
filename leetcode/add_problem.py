@@ -4,7 +4,6 @@ from pathlib import Path
 import requests
 
 
-
 # Leetcode URLs
 API_URL = 'https://leetcode.com/api/problems/algorithms/'
 PROBLEMS_URL_BASE = 'https://leetcode.com/problems/'
@@ -49,11 +48,9 @@ def main(slug: str) -> None:
 
 if __name__ == '__main__':
 
-    # TODO: Remove default URL from args (and set required=True)!!
-
     # Command line arguments
     a = ArgumentParser()
-    a.add_argument('--slug', '-s', default='find-latest-group-of-size-m', help='URL slug of Leetcode problem to fetch. Ex: find-latest-group-of-size-m')
+    a.add_argument('--slug', '-s', required=True, help='URL slug of Leetcode problem to fetch. Ex: find-latest-group-of-size-m')
     args = a.parse_args()
 
     # Strip any '/' if applicable
