@@ -60,32 +60,88 @@ class BinarySearchTree:
         if data > node.data:
             return self._recursively_search(data, node.right)
 
-    def traverse(self, func):
-        self._recursively_traverse(func, self.root)
+    def dfs_traverse(self, func, method):
+        """Perform a DFS tree traversal, employing a specific traversal method and executing a function for each visited Node's data."""
+        if method == 'pre-order':
+            self._recursively_dfs_traverse_pre_order(func, self.root)
 
-    def _recursively_traverse(self, func, node):
-        """Recursively visit each subtree Node and call a function on the data."""
-        if node == None:
+        elif method == 'in-order':
+            self._recursively_dfs_traverse_in_order(func, self.root)
+
+        elif method == 'reverse-in-order':
+            self._recursively_dfs_traverse_reverse_in_order(func, self.root)
+
+        elif method == 'post-order':
+            self._recursively_dfs_traverse_post_order(func, self.root)
+
+        else:
+            raise ValueError(f"Invalid DFS traversal method: {method}")
+
+    def _recursively_dfs_traverse_pre_order(self, func, node):
+        """Recursively perform pre-order DFS traversal, executing a function on each visited Node's data."""
+        if node is None:
+            return
+
+        # Handle current Node
+        func(node.data)
+        
+        # Traverse the left subtree
+        self._recursively_dfs_traverse_pre_order(func, node.left)
+        
+        # Traverse the right subtreee
+        self._recursively_dfs_traverse_pre_order(func, node.right)
+
+    def _recursively_dfs_traverse_in_order(self, func, node):
+        """Recursively perform in-order DFS traversal, executing a function on each visited Node's data."""
+        if node is None:
             return
         
         # Traverse the left subtree
-        self._recursively_traverse(func, node.left)
+        self._recursively_dfs_traverse_in_order(func, node.left)
         
-        # Execute callback function
+        # Handle current Node
         func(node.data)
 
         # Traverse the right subtreee
-        self._recursively_traverse(func, node.right)
+        self._recursively_dfs_traverse_in_order(func, node.right)
+
+    def _recursively_dfs_traverse_reverse_in_order(self, func, node):
+        """Recursively perform reverse-in-order DFS traversal, executing a function on each visited Node's data."""
+        if node is None:
+            return
+        
+        # Traverse the right subtreee
+        self._recursively_dfs_traverse_reverse_in_order(func, node.right)
+
+        # Handle current Node
+        func(node.data)
+
+        # Traverse the left subtree
+        self._recursively_dfs_traverse_reverse_in_order(func, node.left)
+
+    def _recursively_dfs_traverse_post_order(self, func, node):
+        """Recursively perform post-order DFS traversal, executing a function on each visited Node's data."""
+        if node is None:
+            return
+        
+        # Traverse the left subtree
+        self._recursively_dfs_traverse_post_order(func, node.left)
+        
+        # Traverse the right subtreee
+        self._recursively_dfs_traverse_post_order(func, node.right)
+
+        # Handle current Node
+        func(node.data)
 
 
 # --- Execution --- #
 
 bst = BinarySearchTree()
 
-insert_values = [5, 4, 6, 8, 3, 7]
+# insert_values = [5, 4, 6, 8, 3, 7]
+insert_values = ['F', 'B', 'G', 'A', 'D', 'I', 'C', 'E', 'H']
 for val in insert_values:
     bst.insert(val)
 
-
-bst.traverse(print)
+bst.dfs_traverse(print, method='post-order')
 
