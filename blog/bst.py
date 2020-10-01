@@ -14,24 +14,6 @@ class BinarySearchTree:
     def __init__(self, root=None):
         self.root = root  # Root Node
 
-    def search(self, data):
-        """Search for a piece of data (a Node) in the tree."""
-        return self._recursively_search(data, self.root)
-
-    def _recursively_search(self, data, node):
-        """Recursively search the tree for a Node matching provided data."""
-        # If we've exhausted tree or the Node has been found, return the result
-        if node is None or node.data == data:
-            return node
-
-        # Continue searching the left subtree        
-        if data < node.data:
-            return self._recursively_search(data, node.left)
-        
-        # Continue searching the right subtree
-        if data > node.data:
-            return self._recursively_search(data, node.right)
-
     def insert(self, data):
         """Add a new piece of data (a new Node) to the tree"""
         # If there is no root node yet, make this node the root. Otherwise, begin insert process at the root.
@@ -60,6 +42,41 @@ class BinarySearchTree:
         else:
             raise ValueError(f"Cannot insert data: '{data}' as it already exists in the tree.")
 
+    def search(self, data):
+        """Search for a piece of data (a Node) in the tree."""
+        return self._recursively_search(data, self.root)
+
+    def _recursively_search(self, data, node):
+        """Recursively search the tree for a Node matching provided data."""
+        # If we've exhausted tree or the Node has been found, return the result
+        if node is None or node.data == data:
+            return node
+
+        # Continue searching the left subtree        
+        if data < node.data:
+            return self._recursively_search(data, node.left)
+        
+        # Continue searching the right subtree
+        if data > node.data:
+            return self._recursively_search(data, node.right)
+
+    def traverse(self, func):
+        self._recursively_traverse(func, self.root)
+
+    def _recursively_traverse(self, func, node):
+        """Recursively visit each subtree Node and call a function on the data."""
+        if node == None:
+            return
+        
+        # Traverse the left subtree
+        self._recursively_traverse(func, node.left)
+        
+        # Execute callback function
+        func(node.data)
+
+        # Traverse the right subtreee
+        self._recursively_traverse(func, node.right)
+
 
 # --- Execution --- #
 
@@ -69,5 +86,6 @@ insert_values = [5, 4, 6, 8, 3, 7]
 for val in insert_values:
     bst.insert(val)
 
-print(bst.search(7))
-print(bst.search(100))
+
+bst.traverse(print)
+
