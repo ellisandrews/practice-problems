@@ -1,5 +1,8 @@
 """Implementation of a Binary Search Tree"""
 
+from collections import deque  
+
+
 class Node:
     def __init__(self, data=None, left=None, right=None):
         self.data = data
@@ -133,6 +136,30 @@ class BinarySearchTree:
         # Handle current Node
         func(node.data)
 
+    def bfs_traverse(self, func):
+        """Perform a BFS traversal of the tree, executing a function on each visited Node's data."""
+
+        # Handle edge case where trying to traverse and empty tree
+        if self.root is None:
+            return
+
+        queue = deque([self.root])
+
+        while queue:
+
+            node = queue.popleft()  
+            
+            # Execute the callback function on the Node's data
+            func(node.data) 
+            
+            # Enqueue left child  
+            if node.left is not None:  
+                queue.append(node.left)  
+    
+            # Enqueue right child  
+            if node.right is not None:  
+                queue.append(node.right)  
+
 
 # --- Execution --- #
 
@@ -143,5 +170,6 @@ insert_values = ['F', 'B', 'G', 'A', 'D', 'I', 'C', 'E', 'H']
 for val in insert_values:
     bst.insert(val)
 
-bst.dfs_traverse(print, method='post-order')
+# bst.dfs_traverse(print, method='post-order')
+bst.bfs_traverse(print)
 
