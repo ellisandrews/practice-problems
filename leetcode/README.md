@@ -10,3 +10,4 @@
 | 1576 | [Replace All ?'s to Avoid Consecutive Repeating Characters](https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/) | [1576.py](/leetcode/solutions/1576.py) | Easy |
 | 1593 | [Split a String Into the Max Number of Unique Substrings](https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings) | [1593.py](/leetcode/solutions/1593.py) | Medium |
 | 1561 | [Maximum Number of Coins You Can Get](https://leetcode.com/problems/maximum-number-of-coins-you-can-get) | [1561.py](/leetcode/solutions/1561.py) | Medium |
+| 1609 | [Even Odd Tree](https://leetcode.com/problems/even-odd-tree) | [1609.py](/leetcode/solutions/1609.py) | Medium |
